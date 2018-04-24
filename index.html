@@ -50,7 +50,7 @@
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                         <circle cx="12" cy="13" r="4"></circle>
                     </svg>
-                    <strong>GIPHY</strong>
+                    <strong>Train Scheduler</strong>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -62,39 +62,69 @@
     <main role="main">
         <section class="jumbotron text-center">
             <div class="container">
-                <h1 class="jumbotron-heading text-left">All about your train</h1>
+                <h1 class="jumbotron-heading text-left">Midnight Express stop at City of Deep Heaven station</h1>
+                <h3 class="jumbotron-heading text-left">Departure time for the next train</h3>
             </div>
             <div class="container">
                 <div class="row lead topic-view">
                 </div>
             </div>
         </section>
-        <div class="py-5 bg-light">
-            <div class="container">
-                <div class="row gif-placeholder">
+        <div class="container">
+            <div class="card text-dark mb-3 pb-0">
+                <div class="card-header text-white bg-dark">Current Train Schedule</div>
+                <div class="card-body bg-light">
+                    <table class="table table-sm table-hover" id="scheduler">
+                        <thead class="thead">
+                            <tr>
+                                <th scope="col">Train Name</th>
+                                <th scope="col">Destination</th>
+                                <th scope="col">Frequency (min)</th>
+                                <th scope="col">Next Arrival</th>
+                                <th scope="col">Minutes Away</th>
+                            </tr>
+                        </thead>
+                        <tbody>    
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="container">
             <form>
                 <fieldset>
-                    <div class="card text-white bg-primary mb-3 pb-0">
-                        <div class="card-header"></div>
-                        <div class="card-body">
+                    <div class="card text-dark mb-3 pb-0">
+                        <div class="card-header text-white bg-dark">Add Train</div>
+                        <div class="card-body bg-light">
                             <div class="form-group row">
-                                <label for="gifCategorySelect" class="col-sm-3 col-form-label col-form-label-lg">Additional Giphy</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="gifCategorySelect">
-                                    </select>
+                                <label for="trainName" class="col-sm-4 col-form-label col-form-label-md">Train name</label>
+                                <div class="col-sm-8">
+                                    <input type='text' class="form-control" id="trainName">
                                 </div>
-                                <!-- <label for="gifTopicSelect" class="col-sm-3 col-form-label col-form-label-lg"></label> -->
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="gifTopicSelect">
-                                    </select>
-                                    <!-- <input type="text" class="form-control mt-2" id="gifTopicInput" placeholder="Or enter here"> -->
+                            </div>
+                            <!-- <label for="gifTopicSelect" class="col-sm-3 col-form-label col-form-label-lg"></label> -->
+                            <div class="form-group row">
+                                <label for="destination" class="col-sm-4 col-form-label col-form-label-md">Destination</label>
+                                <div class="col-sm-8">
+                                    <input type='text' class="form-control" id="destination">
                                 </div>
-                                <div class="col-sm-3">
-                                    <button type="button" class="btn btn-success mt-2" id="addGifBtn">Add</button>
+                            </div>
+                            <div class="form-group row">
+                                <label for="firstTrainTime" class="col-sm-4 col-form-label col-form-label-md">First train time (HH:mm - military time)</label>
+                                <div class="col-sm-8">
+                                    <input type='text' class="form-control" id="firstTrainTime">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="frequency" class="col-sm-4 col-form-label col-form-label-md">Frequency (min)</label>
+                                <div class="col-sm-8">
+                                    <input type='text' class="form-control" id="frequency">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="submit" class="col-sm-4 col-form-label col-form-label-md"></label>
+                                <div class="col-sm-8">
+                                    <button type="submit" class="btn btn-success mt-2" id="add-train">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -102,15 +132,14 @@
                 </fieldset>
             </form>
         </div>
-        
-
     </main>
     <footer class="text-muted">
         <div class="container">
             <p class="float-right">
                 <a href="#">Back to top</a>
             </p>
-            <p>The appliation is in use of other third party framework or library, such as &copy; Bootstrap, JQuery, GIPHY.COM, babel.js, Github.com.</p>
+            <p>The appliation is in use of other third party framework or library, such as &copy; Bootstrap, JQuery, moment.js,
+                babel.js, Github.com.</p>
             <p>
                 <!-- <a href="../../">Visit the homepage</a> or read our -->
                 <!-- <a href="../../getting-started/">getting started guide</a>.</p> -->
@@ -125,12 +154,15 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
-  
+
     <!-- Although some part of the codes use ES6, babel.js is not downloaded when the web application runs
     because of inconvenience that the app should be run in the localhost for test, not from the file. -->
     <!-- <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
     <script src="assets/javascript/babel.min.js"></script>
     <script src="assets/javascript/main.js" type="text/babel" data-presets="es2015,stage-2"></script> -->
-    <script src="assets/javascript/main.js" type="text/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="assets/js/app.js" type="text/javascript"></script>
 
 </html>
